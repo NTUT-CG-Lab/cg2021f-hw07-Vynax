@@ -93,6 +93,22 @@
 
                 var dimension = dicom2Raw.getDim();
                 document.getElementById('size').innerText = '尺寸: ' + dimension.x + ' x ' + dimension.y + ' x ' + dimension.z;
+
+                dicom2Raw.concatnate(function () {
+                    document.getElementById('download-button').setAttribute('class', 'my-btn allow');
+
+                    document.getElementById('info').innerText = '轉換完成';
+
+                    document.getElementById('download-button').addEventListener('click', function () {
+                        let filename = document.getElementById('file-name').value;
+
+                        Dicom2Raw.downloadData(
+                            filename + '.raw',
+                            dicom2Raw.rawData
+                        );
+                    });
+
+                });
             }
         );
     };
